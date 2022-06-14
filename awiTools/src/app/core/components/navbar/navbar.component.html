@@ -1,1 +1,75 @@
-<p>navbar works!</p>
+<mat-toolbar class="nav-mainbar">
+   
+    <ng-container *ngFor="let el of navElements">
+        <ng-container *ngIf="el.children !== undefined && el.children.length > 0; else normBtn; context: el">
+            <ng-container  
+                *ngTemplateOutlet="recursiveListTmpl; context:{ element: el}"  
+            ></ng-container>
+            <ng-template #recursiveListTmpl let-element="element">  
+                <button mat-menu-item [matMenuTriggerFor]="menu">
+                    <mat-icon *ngIf="element.icon">{{element.icon}}</mat-icon>
+                    {{element.name}} >
+                </button>
+                <mat-menu #menu xPosition="after">
+                    <ng-container *ngFor="let child of element.children; let i = index">
+                        <ng-container *ngIf="child.children !== undefined && child.children.length > 0; else endBtn; context: child">
+                            <!-- <button mat-menu-item >  
+                                <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+                                {{item.name}}                                
+                            </button>  -->
+                            <ng-container  
+                                *ngTemplateOutlet="recursiveListTmpl; context:{ element: child }"  
+                            ></ng-container>   
+                        </ng-container>                       
+                        <ng-template #endBtn>
+                            <button mat-menu-item     
+                            [ngClass]="child.class ?? ''"
+                            [routerLink]="child.route"
+                            [routerLinkActive]="child.activeClass"
+                            [routerLinkActiveOptions]="{exact: child.routerLinkExact ?? false}" 
+                            [id]="child.id"   
+                            >
+                            <mat-icon *ngIf="child.icon">{{child.icon}}</mat-icon>
+                            {{child.name}}
+                            </button > 
+                        </ng-template>   
+                    </ng-container>
+                </mat-menu>               
+             </ng-template>   
+        </ng-container>
+        <ng-template #normBtn>               
+            <button mat-menu-item      
+            [ngClass]="el.class ?? ''"
+            [routerLink]="el.route"
+            [routerLinkActive]="el.activeClass"
+            [routerLinkActiveOptions]="{exact: el.routerLinkExact ?? false}" 
+            [id]="el.id"   
+            >
+            <mat-icon *ngIf="el.icon">{{el.icon}}</mat-icon>
+            {{el.name}}
+            </button > 
+        </ng-template>  
+    </ng-container>
+    <!-- <mat-button  
+    *ngFor="let el of navElements; let i = index "
+    [ngClass]="el.class ?? ''"
+    [routerLink]="el.route"
+    [routerLinkActive]="el.activeClass"
+    [routerLinkActiveOptions]="{exact: el.routerLinkExact ?? false}" 
+    [id]="el.id"   
+    >
+    <mat-icon *ngIf="el.icon">{{el.icon}}</mat-icon>
+    {{el.name}}
+    </mat-button > -->
+
+   
+   
+    
+
+</mat-toolbar>
+<ng-container *ngFor="let el of navElements">
+    <ng-container *ngIf="el.children !== undefined && el.children.length > 0">
+          
+         
+    </ng-container>
+</ng-container>

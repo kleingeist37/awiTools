@@ -8,7 +8,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatMenuModule} from '@angular/material/menu';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -32,13 +32,14 @@ import {MatTreeModule} from '@angular/material/tree';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
 
 
 
     MatSelectModule,
     MatSnackBarModule,
 
-    
+
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
